@@ -17,14 +17,10 @@ export const signUpService = async (userData: User) => {
         throw new CustomError(`Email ${userData.email} already exists`, 409);
     }
 
-    const randomId = (Date.now() + Math.floor(Math.random() * 100)).toString(
-        36,
-    );
-    const username = `${userData.email.split('@')[0]}-${randomId}`;
+ 
     const hashedPassword = await hash(userData.password, 10);
     const newUserData = await repo.createUser({
         ...userData,
-        username,
         password: hashedPassword,
     });
 

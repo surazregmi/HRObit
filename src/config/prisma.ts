@@ -2,6 +2,8 @@
 import { PrismaClient } from '@prisma/client';
 import { DATABASE_URL, NODE_ENV } from '../config';
 
+import { serializeBigIntMiddleware } from '../middlewares/serializeBigint';
+
 if (!DATABASE_URL) {
     throw new Error(
         'DATABASE_URL is not defined. Please check your environment file.',
@@ -16,5 +18,7 @@ export const prisma = new PrismaClient({
             ? ['query', 'info', 'warn', 'error']
             : ['error'],
 });
+
+prisma.$use(serializeBigIntMiddleware);
 
 export default prisma;

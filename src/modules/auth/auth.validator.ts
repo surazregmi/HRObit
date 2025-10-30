@@ -15,15 +15,17 @@ export const validateSignUp = (userData: any) => {
             'number.integer': 'User ID must be an integer.',
             'number.positive': 'User ID must be a positive number.',
         }),
+        tenantId: Joi.number().integer().positive().required().messages({
+            'number.base': 'Tenant ID must be a number.',
+            'number.integer': 'Tenant ID must be an integer.',
+            'number.positive': 'Tenant ID must be a positive number.',
+            'any.required': 'Tenant Id is required.',
+        }),
         email: Joi.string().email().required().messages({
             'string.email': 'Email format is invalid',
             'any.required': 'Email is required',
         }),
-        name: Joi.string().min(1).required().messages({
-            'string.min': 'Name should at least minimum 1 character',
-            'any.required': 'Name is required',
-        }),
-        username: Joi.string().optional(),
+
         password: Joi.string()
             .min(8)
             .pattern(

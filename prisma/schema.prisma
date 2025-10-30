@@ -13,12 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Tenant {
+  id          BigInt     @id @default(autoincrement())
+  name        String
+  domain      String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now())
+  users       User[]
+
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  username  String   @unique
+  id        BigInt      @id @default(autoincrement())
+  tenantId     BigInt?
+  tenant       Tenant?   @relation(fields: [tenantId], references: [id])
   email     String   @unique
   password  String
+  isActive     Boolean   @default(true)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  lastLoginAt  DateTime?
 }

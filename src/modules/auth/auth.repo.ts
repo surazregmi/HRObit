@@ -1,5 +1,5 @@
 import prisma from '@/config/prisma';
-import { User } from '@prisma/client'; // Generated types
+import { User } from '@prisma/client';
 
 const repo = {
     findUserByEmail: async (email: string): Promise<User | null> => {
@@ -7,7 +7,7 @@ const repo = {
     },
 
     createUser: async (
-        userData: Omit<User, 'id' | 'createdAt' | 'updatedAt'>,
+        userData: Omit<User, 'id' | 'createdAt' | 'lastLoginAt'>,
     ): Promise<User> => {
         return await prisma.user.create({ data: userData });
     },
