@@ -10,10 +10,11 @@ const options = {
 
 export const validateSignUp = (userData: any) => {
     const schema = Joi.object({
-        id: Joi.string()
-            .guid({ version: 'uuidv4' })
-            .optional()
-            .messages({ 'string.guid': 'User ID must be in UUID format' }),
+        id: Joi.number().integer().positive().optional().messages({
+            'number.base': 'User ID must be a number.',
+            'number.integer': 'User ID must be an integer.',
+            'number.positive': 'User ID must be a positive number.',
+        }),
         email: Joi.string().email().required().messages({
             'string.email': 'Email format is invalid',
             'any.required': 'Email is required',
