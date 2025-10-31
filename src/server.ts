@@ -4,6 +4,7 @@ import router from '@routes/routes';
 import logger from '@utils/logger';
 import prisma from './config/prisma';
 import { PORT } from './config';
+import './utils/globalSetup';
 import { errorHandler } from './utils/error-handler';
 import { swaggerSpec, swaggerUi } from './utils/swagger';
 

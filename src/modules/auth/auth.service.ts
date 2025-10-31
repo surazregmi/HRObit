@@ -1,4 +1,5 @@
-import { User } from '@/interfaces/user.interfaces';
+// import { User } from '@/interfaces/user.interfaces';
+import { User } from '@prisma/client';
 import { validateSignIn, validateSignUp } from './auth.validator';
 import repo from './auth.repo';
 import { compareSync, hash } from 'bcrypt';
@@ -17,7 +18,6 @@ export const signUpService = async (userData: User) => {
         throw new CustomError(`Email ${userData.email} already exists`, 409);
     }
 
- 
     const hashedPassword = await hash(userData.password, 10);
     const newUserData = await repo.createUser({
         ...userData,
